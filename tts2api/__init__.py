@@ -51,6 +51,8 @@ def get_token(request):
     token = request.headers.get("Authorization") or ZAI_TOKEN
     if token.startswith("Bearer "):
         token = token[7:]
+    if token.lower() in ["none", "null"]:
+        token = ""
     return token.strip()
 
 async def audio_speech(request):
@@ -67,7 +69,7 @@ async def audio_speech(request):
             "voice_name": voice_name,
             "voice_id": voice_id,
             "user_id": payload.get("user_id") or ZAI_USERID,
-            "input_text": payload.get("text", ""),
+            "input_text": payload.get("input", ""),
             "speed": int(float(payload.get("speed", 1)) * 10) / 10,
             "volume": int(payload.get("volume", 1)),
         },

@@ -19,7 +19,7 @@ docker run -d \
   --name zai-tts2api \
   --restart=unless-stopped \
   -p 8823:80 \
-  ghcr.nju.edu.cn/aahl/zai-tts2api:main
+  ghcr.io/aahl/zai-tts2api:main
 ```
 
 ### 🏠 Home Assistant OS Add-on
@@ -44,7 +44,7 @@ docker run -d \
 curl --request POST \
   --url http://localhost:8823/v1/audio/speech \
   --header 'Content-Type: application/json' \
-  --data '{"voice":"system_001", "text":"hello", "speed":1.0, "volume":1}' \
+  --data '{"voice":"system_001", "input":"hello", "speed":1.0, "volume":1}' \
   --output output.wav
 ```
 

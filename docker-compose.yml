@@ -1,7 +1,7 @@
 services:
   zai-tts2api:
     container_name: zai-tts2api
-    image: ghcr.nju.edu.cn/aahl/zai-tts2api:main
+    image: ghcr.io/aahl/zai-tts2api:main
     build: .
     ports:
       - 8823:80
