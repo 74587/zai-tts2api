@@ -1,0 +1,12 @@
+services:
+  zai-tts2api:
+    container_name: zai-tts2api
+    image: ghcr.nju.edu.cn/aahl/zai-tts2api:main
+    build: .
+    ports:
+      - 8823:80
+    environment:
+      ZAI_USERID: ${ZAI_USERID}
+      ZAI_TOKEN: ${ZAI_TOKEN}
+      TZ: ${TZ:-Asia/Shanghai}
+    restart: unless-stopped

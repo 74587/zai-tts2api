@@ -1,0 +1,22 @@
+[project]
+name = "zai-tts2api"
+version = "0.1.0"
+description = "ZAI/GLM TTS to OpenAI Speech API"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "aiohttp>=3.8.0",
+]
+
+[project.urls]
+Repository = "https://github.com/aahl/zai-tts2api"
+
+[project.scripts]
+tts2api = "tts2api:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["tts2api"]
