@@ -28,8 +28,9 @@ async def init_session(app):
 async def api_request(api, json=None, headers=None, **kwargs):
     _LOGGER.info("%s: %s", api, json)
     token = kwargs.pop("token") or ZAI_TOKEN
-    return await SESSION.post(
-        api,
+    method = kwargs.pop("method", "POST")
+    return await SESSION.request(
+        method, api,
         json=json,
         headers={
             aiohttp.hdrs.AUTHORIZATION: f"Bearer {token}",
@@ -43,9 +44,26 @@ async def api_request(api, json=None, headers=None, **kwargs):
 
 async def get_models(request):
     models = [
-        {"id": "cog-tts"},
+        {"id": "zai-tts"},
     ]
-    return web.json_response({"data": models})
+    data = {"data": models}
+    res = await api_request(
+        "/api/v1/z-audio/voices/list",
+        method="GET",
+        params={
+            "page": 1,
+            "page_size": 200,
+            "user_id": request.query.get("user_id") or ZAI_USERID,
+        },
+        token=get_token(request),
+    )
+    if res.status == 200:
+        data["voices"] = (await res.json())["data"]
+    else:
+        data["code"] = res.status
+        data["error"] = await res.text()
+        data["request_info"] = str(res.request_info)
+    return web.json_response(data)
 
 def get_token(request):
     token = request.headers.get("Authorization") or ZAI_TOKEN
@@ -60,8 +78,8 @@ async def audio_speech(request):
     voice_id = payload.get("voice") or "system_001"
     voice_name = {
         "system_001": "活泼女声",
-        "system_002": "通用男声",
-        "system_003": "温柔女声",
+        "system_002": "温柔女声",
+        "system_003": "通用男声",
     }.get(voice_id, "")
     res = await api_request(
         "/api/v1/z-audio/tts/create",
