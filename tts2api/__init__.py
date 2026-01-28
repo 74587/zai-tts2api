@@ -7,9 +7,10 @@ import aiohttp
 from aiohttp import web
 from base64 import b64decode
 
-logging.basicConfig(level=logging.WARNING)
+logging.basicConfig(level=logging.WARNING, format='%(asctime)s %(levelname)s: %(message)s')
 _LOGGER = logging.getLogger(__name__)
-_LOGGER.setLevel(logging.DEBUG)
+_LOGGER.setLevel(logging.INFO)
+
 BASE_URL = os.getenv("BASE_URL") or "https://audio.z.ai"
 HTTP_PORT = int(os.getenv("HTTP_PORT") or 80)
 USER_AGENT = os.getenv("USER_AGENT") or "Mozilla/5.0 AppleWebKit/537.36 Chrome/143 Safari/537"

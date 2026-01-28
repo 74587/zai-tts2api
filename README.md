@@ -19,6 +19,8 @@ docker run -d \
   --name zai-tts2api \
   --restart=unless-stopped \
   -p 8823:80 \
+  -e ZAI_USERID=xxxx-yyyy \
+  -e ZAI_TOKEN=eyJhbGc... \
   ghcr.io/aahl/zai-tts2api:main
 ```
 
@@ -39,6 +41,13 @@ docker run -d \
 
 ## 💻 Usage / 使用
 
+### 🎼 内置音色
+- `system_001`: 活泼女声
+- `system_002`: 温柔女声
+- `system_003`: 通用男声
+
+> 如果想要使用克隆的音色，请在`audio.z.ai`完成音色克隆，并通过接口`http://localhost:8823/v1/models`获取
+
 ### 🌐 CURL调用示例
 ```shell
 curl --request POST \
@@ -55,5 +64,3 @@ curl --request POST \
    > 服务商: 自定义; 接口: `http://4e0de88e-zai-tts/v1`; 密钥留空
 3. 添加TTS模型，模型ID随意
 4. 配置语音助手
-
-> 如果想要使用克隆的音色，请在`audio.z.ai`完成音色克隆，并通过F12获取`voice_id`作为`voice`参数值
