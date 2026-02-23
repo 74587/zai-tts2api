@@ -4,11 +4,11 @@
 
 ### 🐳 Docker compose
 ```shell
-mkdir /opt/zai-tts2api
-cd /opt/zai-tts2api
+mkdir /opt/zai-tts
+cd /opt/zai-tts
 echo "ZAI_USERID=xxxx-yyyy" > .env
 echo "ZAI_TOKEN=eyJhbGc..." >> .env
-wget https://raw.githubusercontent.com/aahl/zai-tts2api/refs/heads/main/docker-compose.yml
+wget https://raw.githubusercontent.com/aahl/zai-tts/refs/heads/main/docker-compose.yml
 docker compose up -d
 ```
 > `ZAI_USERID`和`ZAI_TOKEN`可在`audio.z.ai`登录后，通过F12开发者工具在控制台执行`localStorage['auth-storage']`获取
@@ -16,12 +16,12 @@ docker compose up -d
 ### 🐳 Docker run
 ```shell
 docker run -d \
-  --name zai-tts2api \
+  --name zai-tts \
   --restart=unless-stopped \
   -p 8823:80 \
   -e ZAI_USERID=xxxx-yyyy \
   -e ZAI_TOKEN=eyJhbGc... \
-  ghcr.io/aahl/zai-tts2api:main
+  ghcr.io/aahl/zai-tts:main
 ```
 
 ### 🏠 Home Assistant OS Add-on
@@ -30,7 +30,7 @@ docker run -d \
    * 点击右下角的 **加载项商店 (Add-on Store)**
    * 点击右上角的三个点 -> **仓库 (Repositories)**
    * 在输入框填入：`https://gitee.com/hasscc/addons`, 点击添加
-   [![添加加载项仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgitee.com%2Fhasscc%2Faddons)
+   * 或者点击此按钮一键添加: [![添加加载项仓库](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgitee.com%2Fhasscc%2Faddons)
 
 2. **安装加载项**：
    * 刷新页面，找到并点击 **`智谱TTS`**
@@ -55,6 +55,18 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{"voice":"system_001", "input":"hello", "speed":1.0, "volume":1}' \
   --output output.wav
+```
+
+### 🐚 命令行
+```shell
+uvx zai-tts -h
+
+# 获取音色
+uvx zai-tts -l
+
+# 语音合成
+uvx zai-tts -t 'Hello, world' -o hello.wav
+uvx zai-tts -t 'Hello, world' -v system_001 --speed 1.2 > hello.wav 
 ```
 
 ### 🏠 Home Assistant

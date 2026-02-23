@@ -1,7 +1,7 @@
 [project]
 name = "zai-tts"
-version = "0.1.0b1"
-description = "ZAI/GLM TTS to OpenAI Speech API"
+version = "0.1.0"
+description = "ZAI/GLM TTS, 免费的语音合成API，支持克隆音色，基于智谱TTS"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
@@ -10,7 +10,7 @@ dependencies = [
 ]
 
 [project.urls]
-Repository = "https://github.com/aahl/zai-tts2api"
+Repository = "https://github.com/aahl/zai-tts"
 
 [project.scripts]
 zai-tts = "zai_tts:main"

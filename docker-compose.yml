@@ -1,7 +1,7 @@
 services:
-  zai-tts2api:
-    container_name: zai-tts2api
-    image: ghcr.io/aahl/zai-tts2api:main
+  zai-tts:
+    container_name: zai-tts
+    image: ghcr.io/aahl/zai-tts:main
     build: .
     ports:
       - 8823:80
