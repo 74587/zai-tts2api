@@ -12,5 +12,5 @@ COPY . .
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv sync --locked --no-dev
 
-CMD tts2api
+CMD zai-tts
 HEALTHCHECK --interval=1m --start-period=10s CMD nc -zn 0.0.0.0 80 || exit 1
