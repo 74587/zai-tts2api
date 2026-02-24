@@ -24,6 +24,11 @@ docker run -d \
   ghcr.io/aahl/zai-tts:main
 ```
 
+### 🤖 Agent Skills
+```shell
+npx skills add aahl/skills --skill zai-tts
+```
+
 ### 🏠 Home Assistant OS Add-on
 1. 添加加载项仓库
    * 打开 HomeAssistant，点击左侧菜单的 **配置 (Settings)** -> **加载项 (Add-ons)**
